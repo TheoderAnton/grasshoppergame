@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://cf5l6rmyfirx6"]
+
+[ext_resource type="Script" uid="uid://ci6af00jrk3cq" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://b53xjhrsessbn" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://cve84lgpp1h5n" path="res://platform_spawner.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://c346b6o0ocuqt" path="res://platform.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://0gx3tgps23" path="res://hud.gd" id="4_1bvp3"]
+
+[sub_resource type="Gradient" id="Gradient_lquwl"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7mycd"]
+gradient = SubResource("Gradient_lquwl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lquwl"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 98, 0)
+scale_min = 5.0
+scale_max = 20.0
+color_ramp = SubResource("GradientTexture1D_7mycd")
+
+[node name="Main" type="Node" unique_id=1044724506]
+script = ExtResource("1_0xm2m")
+
+[node name="Player" parent="." unique_id=639852091 instance=ExtResource("1_ig7tw")]
+position = Vector2(321, 74)
+
+[node name="PlatformSpawner" type="Node2D" parent="." unique_id=214495627]
+script = ExtResource("2_0xm2m")
+platform_scene = ExtResource("3_h2yge")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1314664409]
+script = ExtResource("4_1bvp3")
+
+[node name="Label" type="Label" parent="HUD" unique_id=646358022]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 5.0
+offset_bottom = 23.0
+grow_horizontal = 2
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+text = "0m"
+
+[node name="Button" type="Button" parent="HUD" unique_id=1982266273]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.72400004
+anchor_right = 0.5
+anchor_bottom = 0.72400004
+offset_left = -98.0
+offset_top = -49.048035
+offset_right = 102.0
+offset_bottom = 50.951965
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Restart"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=171583747]
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_lquwl")
+
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
+[connection signal="hit" from="Player" to="HUD" method="_on_player_hit"]
+[connection signal="pressed" from="HUD/Button" to="Player" method="_on_button_pressed"]

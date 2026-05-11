@@ -1,0 +1,13 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1778494992
+camera_2d.gd::GDScript::6748291787572805377::1778239923::0::1::::<>Camera2D<><>0<>0<><>::
+grasshopperimage.png::CompressedTexture2D::407394528717113946::1778238877::1778238967::1::::<><><>0<>0<>94de54bc6d881cd93e2bbd8d4465b646<>res://.godot/imported/grasshopperimage.png-21e4d856d7a2ad8a574dbf4ee44c310d.ctex::
+grasstexture.png::CompressedTexture2D::7189815923865083349::1778240870::1778240882::1::::<><><>0<>0<>8630c46712cb47611a0f846091237c47<>res://.godot/imported/grasstexture.png-6a24edfbd329542ae46ad7cc6ae8493b.ctex::
+hud.gd::GDScript::1529891746070322::1778248308::0::1::::<>CanvasLayer<><>0<>0<><>::
+icon.svg::CompressedTexture2D::7436728768638687066::1778236961::1778236968::1::::<><><>0<>0<>70edda6cd4fe739cd913e00b5eee1bbc<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+main.gd::GDScript::5398358107971764740::1778245379::0::1::::<>Node<><>0<>0<><>::
+main.tscn::PackedScene::5186441077261712385::1778248704::0::1::::<><><>0<>0<><>::uid://ci6af00jrk3cq::::res://main.gd<>uid://b53xjhrsessbn::::res://player.tscn<>uid://cve84lgpp1h5n::::res://platform_spawner.gd<>uid://c346b6o0ocuqt::::res://platform.tscn<>uid://0gx3tgps23::::res://hud.gd
+platform.tscn::PackedScene::6799881607694320531::1778243278::0::1::::<><><>0<>0<><>::uid://dao2hn2h1vv54::::res://grasstexture.png
+platform_spawner.gd::GDScript::6257120631313942085::1778243239::0::1::::<>Node2D<><>0<>0<><>::
+player.gd::GDScript::5750537905700588383::1778248887::0::1::::<>CharacterBody2D<><>0<>0<><>::
+player.tscn::PackedScene::4551301527675556423::1778240631::0::1::::<><><>0<>0<><>::uid://cn6urwenguml0::::res://player.gd<>uid://f2ly08y5i5ww::::res://grasshopperimage.png

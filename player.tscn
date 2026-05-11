@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b53xjhrsessbn"]
+
+[ext_resource type="Script" uid="uid://cn6urwenguml0" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://f2ly08y5i5ww" path="res://grasshopperimage.png" id="2_onrkg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(444, 212)
+
+[node name="Player" type="CharacterBody2D" unique_id=639852091]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_onrkg")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=634200096]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_onrkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2096590524]
+position = Vector2(-27, 13)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1734822758]
+limit_enabled = false
+limit_left = 0
+drag_horizontal_enabled = true
+drag_left_margin = 1.0
+drag_right_margin = 1.0
