@@ -7,29 +7,51 @@
 [ext_resource type="Script" uid="uid://0gx3tgps23" path="res://hud.gd" id="4_1bvp3"]
 
 [sub_resource type="Gradient" id="Gradient_lquwl"]
-colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0, 0.2, 1, 1, 1, 0.9, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7mycd"]
 gradient = SubResource("Gradient_lquwl")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lquwl"]
-lifetime_randomness = 0.5
+lifetime_randomness = 1.0
 particle_flag_disable_z = true
 spread = 180.0
-initial_velocity_min = 100.0
-initial_velocity_max = 300.0
-gravity = Vector3(0, 98, 0)
-scale_min = 5.0
-scale_max = 20.0
+initial_velocity_min = 400.0
+initial_velocity_max = 900.0
+gravity = Vector3(0, 200, 0)
+scale_min = 10.0
+scale_max = 40.0
 color_ramp = SubResource("GradientTexture1D_7mycd")
+
+[sub_resource type="GDScript" id="GDScript_ctrl"]
+script/source = "
+extends Node2D
+
+var _a: float = 2.5
+var _b: float = 0.08
+
+@onready var _p = $'../WorldContainer/Player'
+@onready var _w = $'../WorldContainer'
+
+func _process(delta: float) -> void:
+    _w.rotation += deg_to_rad(_a) * delta
+    if _p:
+        _p.scale += Vector2(_b, _b) * delta
+        _p.scale.x = -abs(_p.scale.x)
+"
 
 [node name="Main" type="Node" unique_id=1044724506]
 script = ExtResource("1_0xm2m")
 
-[node name="Player" parent="." unique_id=639852091 instance=ExtResource("1_ig7tw")]
-position = Vector2(321, 74)
+[node name="SceneRoot" type="Node2D" parent="." unique_id=998877001]
 
-[node name="PlatformSpawner" type="Node2D" parent="." unique_id=214495627]
+[node name="WorldContainer" type="Node2D" parent="SceneRoot" unique_id=112233445]
+
+[node name="Player" parent="WorldContainer" unique_id=639852091 instance=ExtResource("1_ig7tw")]
+position = Vector2(321, 74)
+scale = Vector2(2.0, 2.0)
+
+[node name="PlatformSpawner" type="Node2D" parent="WorldContainer" unique_id=214495627]
 script = ExtResource("2_0xm2m")
 platform_scene = ExtResource("3_h2yge")
 
@@ -64,13 +86,16 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Restart"
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=171583747]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="WorldContainer" unique_id=171583747]
 emitting = false
-amount = 30
+amount = 80
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_lquwl")
 
-[connection signal="hit" from="Player" to="." method="_on_player_hit"]
-[connection signal="hit" from="Player" to="HUD" method="_on_player_hit"]
-[connection signal="pressed" from="HUD/Button" to="Player" method="_on_button_pressed"]
+[node name="Node2D" type="Node2D" parent="SceneRoot" unique_id=777123456]
+script = SubResource("GDScript_ctrl")
+
+[connection signal="hit" from="SceneRoot/WorldContainer/Player" to="." method="_on_player_hit"]
+[connection signal="hit" from="SceneRoot/WorldContainer/Player" to="HUD" method="_on_player_hit"]
+[connection signal="pressed" from="HUD/Button" to="SceneRoot/WorldContainer/Player" method="_on_button_pressed"]
